@@ -14,14 +14,16 @@ public class VacationCalculateServiceTest {
     @Test
     void calculateWithoutDate() {
         // Ручной расчет: 85000 / 29.3 * 14 = 40614.33
+        double expectation = Math.round(averageSalary/vacationFactor*14*100)/100.0;
         double result = service.getPay(averageSalary, vacationDays);
-        assertEquals(40614.33, result, 0.01, "Неверный расчет для 85000 руб и 14 дней");
+        assertEquals(expectation, result, 0.01, "Неверный расчет для 85000 руб и 14 дней");
     }
 
     @Test
     void calculateWithDate() {
+        double expectation = Math.round(averageSalary/vacationFactor*9*100)/100.0;
         double result = service.getPay(averageSalary, vacationDays, "01.06.2025");
-        assertEquals(26109.22, result, 0.01, "Неверный расчет с учетом выходных");
+        assertEquals(expectation, result, 0.01, "Неверный расчет с учетом выходных");
     }
 
     @Test
